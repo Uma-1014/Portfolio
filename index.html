@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Umamaheswari Reddy — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0A0F1E;
+    --navy2:   #111827;
+    --teal:    #00D4B4;
+    --teal2:   #00A891;
+    --white:   #F0EEE8;
+    --slate:   #8892A4;
+    --card:    #141C2E;
+    --border:  #1E2D47;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 5vw;
+    background: rgba(10,15,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.1rem; letter-spacing: -0.02em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--slate); font-size: 0.875rem; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 5vw 4rem;
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero::before {
+    content: '';
+    position: absolute; top: -200px; right: -200px;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,180,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-text { position: relative; z-index: 2; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; color: var(--teal); letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.3rem;
+  }
+  .hero-name .line2 {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--teal);
+  }
+  .hero-role {
+    font-size: 1.1rem; color: var(--slate);
+    margin-bottom: 2rem; font-weight: 300;
+  }
+  .hero-desc {
+    font-size: 0.95rem; color: var(--slate);
+    max-width: 400px; line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--navy);
+    padding: 0.75rem 2rem; border-radius: 4px;
+    text-decoration: none; font-weight: 600; font-size: 0.875rem;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--teal2); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--border); color: var(--white);
+    padding: 0.75rem 2rem; border-radius: 4px;
+    text-decoration: none; font-size: 0.875rem;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-2px); }
+
+  /* Code window */
+  .hero-visual { position: relative; z-index: 2; }
+  .code-window {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,212,180,0.08);
+  }
+  .window-bar {
+    background: var(--navy2);
+    padding: 0.8rem 1rem;
+    display: flex; align-items: center; gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #FF5F57; }
+  .dot.y { background: #FEBC2E; }
+  .dot.g { background: #28C840; }
+  .window-bar span {
+    margin-left: auto; color: var(--slate); font-size: 0.7rem;
+  }
+  .code-body { padding: 1.5rem; line-height: 2; }
+  .c-comment { color: #4B6380; }
+  .c-keyword { color: #FF79C6; }
+  .c-fn { color: var(--teal); }
+  .c-str { color: #F1FA8C; }
+  .c-var { color: #BD93F9; }
+  .c-num { color: #FFB86C; }
+  .cursor {
+    display: inline-block; width: 8px; height: 1em;
+    background: var(--teal); vertical-align: text-bottom;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 5vw; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--teal);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+  }
+  .divider {
+    height: 1px; background: var(--border);
+    margin: 0 5vw;
+  }
+
+  /* ── ABOUT ── */
+  #about .about-grid {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 4rem;
+    align-items: start;
+  }
+  .about-text p { color: var(--slate); line-height: 1.8; margin-bottom: 1rem; }
+  .about-text p strong { color: var(--white); }
+  .about-stats {
+    display: flex; flex-direction: column; gap: 1.5rem;
+  }
+  .stat-item { border-left: 2px solid var(--teal); padding-left: 1rem; }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem; font-weight: 700; color: var(--white);
+  }
+  .stat-label { font-size: 0.8rem; color: var(--slate); }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--card); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .skill-card:hover { border-color: var(--teal); transform: translateY(-3px); }
+  .skill-icon {
+    font-size: 1.8rem; margin-bottom: 1rem;
+  }
+  .skill-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 1rem; margin-bottom: 0.5rem;
+  }
+  .skill-desc { font-size: 0.82rem; color: var(--slate); line-height: 1.6; }
+  .skill-bar-wrap {
+    margin-top: 1rem;
+    height: 3px; background: var(--border); border-radius: 99px; overflow: hidden;
+  }
+  .skill-bar {
+    height: 100%; background: var(--teal); border-radius: 99px;
+    transform-origin: left;
+    animation: growBar 1.2s ease forwards;
+  }
+  @keyframes growBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+  /* ── PROJECTS ── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--teal), transparent);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .project-card:hover { border-color: var(--teal); transform: translateY(-4px); }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--teal);
+    margin-bottom: 1rem;
+  }
+  .project-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 1.1rem; margin-bottom: 0.75rem;
+  }
+  .project-desc { font-size: 0.875rem; color: var(--slate); line-height: 1.7; }
+  .project-tags {
+    margin-top: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 99px; color: var(--slate);
+  }
+
+  /* ── EDUCATION ── */
+  #education { background: var(--card); }
+  .edu-card {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2rem 2.5rem;
+    max-width: 700px;
+    display: flex; gap: 2rem; align-items: flex-start;
+  }
+  .edu-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    background: rgba(0,212,180,0.1); border: 1px solid rgba(0,212,180,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; flex-shrink: 0;
+  }
+  .edu-degree {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600; font-size: 1.05rem;
+  }
+  .edu-school { color: var(--teal); font-size: 0.875rem; margin: 0.3rem 0; }
+  .edu-location { color: var(--slate); font-size: 0.82rem; }
+
+  /* ── CONTACT ── */
+  #contact {
+    text-align: center;
+    padding: 7rem 5vw;
+    position: relative;
+  }
+  #contact::before {
+    content: '';
+    position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+    width: 300px; height: 300px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,180,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  #contact .section-title { margin-bottom: 1rem; }
+  #contact .sub { color: var(--slate); max-width: 480px; margin: 0 auto 2.5rem; font-size: 0.95rem; }
+  .contact-links {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 5vw;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.8rem; color: var(--slate);
+  }
+  footer span { color: var(--teal); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    #hero { grid-template-columns: 1fr; padding-top: 6rem; }
+    .hero-visual { display: none; }
+    #about .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-stats { flex-direction: row; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">uma<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">// hello, world</p>
+    <h1 class="hero-name">
+      Umamaheswari<br>
+      <span class="line2">Reddy</span>
+    </h1>
+    <p class="hero-role">Full-Stack Developer &amp; CS Student</p>
+    <p class="hero-desc">
+      Building clean, efficient software with Java, JavaScript, and SQL.
+      Currently pursuing B.Tech at BIET, Bhimavaram — turning coursework into real projects.
+    </p>
+    <div class="hero-cta">
+  <a href="#projects" class="btn-primary">View Projects</a>
+  <a href="#contact" class="btn-outline">Get in Touch</a>
+  <a href="https://github.com/Uma-1014" target="_blank" class="btn-outline">GitHub</a>
+  <a href="resume.pdf" download class="btn-primary">
+    📄 Download Resume
+</a>
+</div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="code-window">
+      <div class="window-bar">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
+        <span>developer.js</span>
+      </div>
+      <div class="code-body">
+        <div><span class="c-keyword">const</span> <span class="c-var">developer</span> = {</div>
+        <div>&nbsp;&nbsp;<span class="c-fn">name</span>: <span class="c-str">"Umamaheswari"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="c-fn">role</span>: <span class="c-str">"Full-Stack Dev"</span>,</div>
+        <div>&nbsp;&nbsp;<span class="c-fn">skills</span>: [</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"Java"</span>, <span class="c-str">"SQL"</span>,</div>
+        <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"JavaScript"</span></div>
+        <div>&nbsp;&nbsp;],</div>
+        <div>&nbsp;&nbsp;<span class="c-fn">available</span>: <span class="c-keyword">true</span>,</div>
+        <div>&nbsp;&nbsp;<span class="c-fn">passion</span>: <span class="c-str">"building things"</span></div>
+        <div>};</div>
+        <div>&nbsp;</div>
+        <div><span class="c-comment">// always learning 🚀</span></div>
+        <div><span class="c-fn">console</span>.<span class="c-fn">log</span>(<span class="c-var">developer</span>);<span class="cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <p class="section-label">// 01 — about</p>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm <strong>Umamaheswari Reddy</strong>, a Computer Science student at
+        <strong>Bhimavaram Institute of Engineering and Technology</strong>, Andhra Pradesh.
+        I'm passionate about writing code that solves real problems — from building
+        robust back-end logic in Java to crafting dynamic, responsive web experiences
+        with JavaScript.
+      </p>
+      <p>
+        My core strength is in <strong>data and logic</strong>: I enjoy working with SQL databases,
+        designing efficient queries, and making sense of structured information. I believe
+        great software is part engineering, part craft — and I take both seriously.
+      </p>
+      <p>
+        I'm actively seeking internships and collaborative projects where I can contribute,
+        learn, and grow as a developer.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Core Languages</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">B.Tech</div>
+        <div class="stat-label">Computer Science</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Curiosity</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <p class="section-label">// 02 — skills</p>
+  <h2 class="section-title">Tech Stack</h2>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">☕</div>
+      <div class="skill-name">Java</div>
+      <div class="skill-desc">Object-oriented programming, data structures, algorithms, and back-end application development.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:80%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗄️</div>
+      <div class="skill-name">SQL</div>
+      <div class="skill-desc">Database design, complex queries, joins, aggregations, and relational data modelling.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">⚡</div>
+      <div class="skill-name">JavaScript</div>
+      <div class="skill-desc">Front-end scripting, DOM manipulation, async patterns, and interactive web interfaces.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <div class="skill-name">Web Development</div>
+      <div class="skill-desc">HTML, CSS, and responsive layout principles for building modern, accessible web pages.</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <p class="section-label">// 03 — projects</p>
+  <h2 class="section-title">What I've Built</h2>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-num">P — 01</div>
+      <div class="project-title">Insta Blog Website</div>
+      <div class="project-desc">A blog platform inspired by Instagram for creating and viewing posts. Built a responsive user interface with smooth interactions and a familiar social-style layout.</div>
+      <div class="project-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">P — 02</div>
+      <div class="project-title">Smart Recruitment System</div>
+      <div class="project-desc">A recruitment platform that matches resumes with suitable job roles using automated candidate screening. Leverages Django and database technologies to streamline the hiring pipeline.</div>
+      <div class="project-tags">
+        <span class="tag">Django</span>
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Resume Matching</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-num">P — 03</div>
+      <div class="project-title">E-Commerce Website</div>
+      <div class="project-desc">A fully functional online shopping website with product listings, a shopping cart, and a responsive layout — built entirely with HTML, CSS, and JavaScript for a seamless browsing experience.</div>
+      <div class="project-tags">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDUCATION -->
+<section id="education">
+  <p class="section-label">// 04 — education</p>
+  <h2 class="section-title">Academic Background</h2>
+  <div class="edu-card">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">B.Tech — Computer Science &amp; Engineering</div>
+      <div class="edu-school">Bhimavaram Institute of Engineering and Technology</div>
+      <div class="edu-location">📍 Bhimavaram, Andhra Pradesh, India</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div class="contact-links">
+    <a href="mailto:umamaheswarir448@gmail.com" class="btn-primary">
+        ✉ Email Me
+    </a>
+
+    <a href="https://www.linkedin.com/in/umamaheswari-reddy-3b42102b4"
+       target="_blank"
+       class="btn-outline">
+       LinkedIn →
+    </a>
+
+    <a href="https://github.com/Uma-1014"
+       target="_blank"
+       class="btn-outline">
+       GitHub →
+    </a>
+
+    <a href="resume.pdf"
+       download
+       class="btn-primary">
+       📄 Download Resume
+    </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Umamaheswari Reddy</span>
+  <span>Built with <span>♥</span> &amp; vanilla code</span>
+</footer>
+
+</body>
+</html>
